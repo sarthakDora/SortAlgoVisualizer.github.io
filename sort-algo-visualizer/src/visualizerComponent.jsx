@@ -39,17 +39,10 @@ export default class VisualizerComponent extends Component {
         }
     }
     BubbbleSort() {
-        const originalArray = this.state.arr;
-        console.log("****originalArray1:", originalArray);
         const animations = BubbleSort(this.state.arr);
-        console.log("*****************",animations);
         for (let i = 0; i < animations.length; i++) {
             let color = "";
-            console.log("****Number:", animations[i]);
-            console.log("****originalArray:", originalArray[i]);
-            const bar1 = originalArray[i];
-            const bar2 = animations[i];
-            // const [bar1, bar2] = animations[i];
+            const [bar1, bar2] = animations[i];
             const bar1style = document.getElementById(bar1).style;
             const bar2style = document.getElementById(bar2).style;
             if (i % 3 === 0 || i % 3 === 2) {
