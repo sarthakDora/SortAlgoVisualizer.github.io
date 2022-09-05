@@ -99,26 +99,47 @@ export default class VisualizerComponent extends Component {
         return true;
     }
     onSliderChange(e) {
-        this.setState.SIZE = e.target.value;
-        // this.state.SIZE = e.target.value;
+
+        this.state.SIZE = e.target.value;
         if (e.target.value >= 60 && e.target.value <= 75)
-            this.setState.width = 7;
+            this.state.width = 7;
         else if (e.target.value > 75 && e.target.value <= 90)
-            this.setState.width = 6;
+            this.state.width = 6;
         else if (e.target.value > 90 && e.target.value <= 105)
-            this.setState.width = 5;
+            this.state.width = 5;
         else if (e.target.value > 100 && e.target.value <= 125)
-            this.setState.width = 5;
+            this.state.width = 5;
         else if (e.target.value > 50 && e.target.value < 60)
-            this.setState.width = 8;
+            this.state.width = 8;
         else if (e.target.value > 40 && e.target.value <= 50)
-            this.setState.width = 9;
+            this.state.width = 9;
         else if (e.target.value > 30 && e.target.value <= 40)
-            this.setState.width = 10;
+            this.state.width = 10;
         else if (e.target.value > 20 && e.target.value <= 30)
-            this.setState.width = 11;
+            this.state.width = 11;
         else if (e.target.value > 10 && e.target.value <= 20)
-            this.setState.width = 12;
+            this.state.width = 12;
+
+        // this.setState.SIZE = e.target.value;
+        // // this.state.SIZE = e.target.value;
+        // if (e.target.value >= 60 && e.target.value <= 75)
+        //     this.setState.width = 7;
+        // else if (e.target.value > 75 && e.target.value <= 90)
+        //     this.setState.width = 6;
+        // else if (e.target.value > 90 && e.target.value <= 105)
+        //     this.setState.width = 5;
+        // else if (e.target.value > 100 && e.target.value <= 125)
+        //     this.setState.width = 5;
+        // else if (e.target.value > 50 && e.target.value < 60)
+        //     this.setState.width = 8;
+        // else if (e.target.value > 40 && e.target.value <= 50)
+        //     this.setState.width = 9;
+        // else if (e.target.value > 30 && e.target.value <= 40)
+        //     this.setState.width = 10;
+        // else if (e.target.value > 20 && e.target.value <= 30)
+        //     this.setState.width = 11;
+        // else if (e.target.value > 10 && e.target.value <= 20)
+        //     this.setState.width = 12;
 
 
         this.resetArray();
@@ -143,7 +164,7 @@ export default class VisualizerComponent extends Component {
   render() {
     const { arr } = this.state;
     return (
-      <>
+ <div>
          <button className="btn" id="newArray" onClick={() => {
                     this.resetArray();
                 }}>Generate New Array</button>
@@ -154,18 +175,20 @@ export default class VisualizerComponent extends Component {
         
                 <div style={{ display: "inline-block", margin: "0.5em 0 0.5em" }}>
                     <label style={{ color: "whitesmoke", fontSize: "1.2em", fontFamily: "Roboto" }}>Change array size:</label>
-                    <input className="slider" type="range" min={5} max={125} defaultvalue={50} step={1} onChange={(e) => this.onSliderChange(e)} />
+                    <input className="slider" type="range" min={5} max={125} value={50} step={1} onChange={(e) => this.onSliderChange(e)} />
                 </div>
                 <div style={{ display: "inline-block", margin: "0 0 0 1em" }}>
                     <label style={{ color: "whitesmoke", fontSize: "1.2em", fontFamily: "Roboto" }}>Vary animation speed:</label>
-                    <input className="slider" type="range" min={0.2} max={5} defaultvalue={1} step={0.1} onChange={(e) => this.onSpeedChange(e)} />
+                    <input className="slider" type="range" min={0.2} max={5} value={1} step={0.1} onChange={(e) => this.onSpeedChange(e)} />
                 </div>
                 <div className="array" style={{ margin: "0 4em 0 4em" }}>
                     {arr.map((value, index) => (
                         <li id={index} style={{ listStyle: "none", height: `${value}px`, width: `${this.state.width}px` }}></li>
                     ))}
                 </div>
-      </>
+
+        </div>
+     
     )
   }
 }
