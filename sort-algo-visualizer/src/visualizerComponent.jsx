@@ -145,7 +145,8 @@ export default class VisualizerComponent extends Component {
         this.resetArray();
     }
     onSpeedChange(e) {
-        this.setState.animationTime = e.target.value;
+        this.state.animationTime = e.target.value;
+        // this.setState.animationTime = e.target.value;
     }
     disableButtons(button) {
         const btnarr = ["newArray", "merge", "bubble", "selection", "insertion", "quick"];
@@ -175,11 +176,11 @@ export default class VisualizerComponent extends Component {
         
                 <div style={{ display: "inline-block", margin: "0.5em 0 0.5em" }}>
                     <label style={{ color: "whitesmoke", fontSize: "1.2em", fontFamily: "Roboto" }}>Change array size:</label>
-                    <input className="slider" type="range" min={5} max={125} value={50} step={1} onChange={(e) => this.onSliderChange(e)} />
+                    <input className="slider" type="range" min={5} max={125} defaultvalue={50} step={1} onChange={(e) => this.onSliderChange(e)} />
                 </div>
                 <div style={{ display: "inline-block", margin: "0 0 0 1em" }}>
                     <label style={{ color: "whitesmoke", fontSize: "1.2em", fontFamily: "Roboto" }}>Vary animation speed:</label>
-                    <input className="slider" type="range" min={0.2} max={5} value={1} step={0.1} onChange={(e) => this.onSpeedChange(e)} />
+                    <input className="slider" type="range" min={0.2} max={5} defaultvalue={1} step={0.1} onChange={(e) => this.onSpeedChange(e)} />
                 </div>
                 <div className="array" style={{ margin: "0 4em 0 4em" }}>
                     {arr.map((value, index) => (
