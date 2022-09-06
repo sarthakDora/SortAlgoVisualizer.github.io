@@ -315,26 +315,26 @@ export default class VisualizerComponent extends Component {
     const { arr } = this.state;
     return (
  <div>
-         <button className="btn btn-1 .btn-sep icon-info" id="newArray" onClick={() => {
+         <button className="btn btn-1 .btn-sep" id="newArray" onClick={() => {
                     this.resetArray();
                 }}>New Array</button>
-         <button className="btn btn-1 .btn-sep icon-info" id="bubble" onClick={() => {
-                    this.BubbbleSort();
-                    this.disableButtons("bubble");
+         <button className="btn btn-1 .btn-sep" id="bubble" onClick={() => {
+                this.disableButtons("bubble");
+                this.BubbbleSort();
                 }}>Bubbble Sort</button>
-          <button className="btn btn-1 .btn-sep icon-info" id="insertion" onClick={() => {
+          <button className="btn btn-1 .btn-sep" id="insertion" onClick={() => {
                     this.insertionSort();
                     this.disableButtons("insertion");
                 }}>Insertion Sort</button>
-          <button className="btn btn-1 .btn-sep icon-info" id="selection" onClick={() => {
+          <button className="btn btn-1 .btn-sep" id="selection" onClick={() => {
                     this.selectionSort();
                     this.disableButtons("selection");
                 }}>Selection Sort</button>
-         <button className="btn btn-1 .btn-sep icon-info" id="merge" onClick={() => {
+         <button className="btn btn-1 .btn-sep" id="merge" onClick={() => {
                     this.mergeSort();
                     this.disableButtons("merge");
                 }}>Merge Sort</button>
-         <button className="btn btn-1 .btn-sep icon-info" id="quick" onClick={() => {
+         <button className="btn btn-1 .btn-sep" id="quick" onClick={() => {
                     this.quickSort();
                     this.disableButtons("quick");
                 }}>Quick Sort</button>

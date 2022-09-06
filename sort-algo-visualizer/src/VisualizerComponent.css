@@ -12,27 +12,15 @@ li{
     justify-content: center;
 }
 .btn{
-    /* background-color: #008CBA; */
-    /* border: none;
-    color: white;
-    padding: 0.5em;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 1em;
-    cursor: pointer; */
-
-
     border: none;
     font-family: 'Lato';
     font-size: inherit;
     color: inherit;
     background: none;
     cursor: pointer;
-    padding: 25px 80px;
+    padding: 20px 30px;
     display: inline-block;
-    margin: 15px 30px;
+    margin: 15px 20px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
@@ -89,9 +77,6 @@ li{
 
   .btn-sep {
     padding: 25px 60px 25px 120px;
-  }
-  .icon-info:before {
-    content: "\f05a";
   }
 
 .btn:hover{
