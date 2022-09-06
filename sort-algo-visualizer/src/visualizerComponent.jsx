@@ -5,9 +5,9 @@ import { BubbleSort } from './SortingAlgoComponent/bubbleSort';
 import { InsertionSort } from './SortingAlgoComponent/insertionSort';
 import { SelectionSort } from './SortingAlgoComponent/selectionSort';
 
-const color1 = `red`;
-const color2 = `rgb(177, 177, 248)`;
-const color3 = `rgb(149, 246, 108)`;
+const color1 = `rgb(242, 242, 242)`;
+const color2 = `rgb(251, 139, 36)`;
+const color3 = `rgb(255, 255, 63)`;
 const color4 = `green`;
 
 export default class VisualizerComponent extends Component {
@@ -188,17 +188,17 @@ export default class VisualizerComponent extends Component {
     const { arr } = this.state;
     return (
  <div>
-         <button className="btn" id="newArray" onClick={() => {
+         <button className="btn btn-1 .btn-sep icon-info" id="newArray" onClick={() => {
                     this.resetArray();
-                }}>Generate New Array</button>
-         <button className="btn" id="bubble" onClick={() => {
+                }}>New Array</button>
+         <button className="btn btn-1 .btn-sep icon-info" id="bubble" onClick={() => {
                     this.BubbbleSort();
                     this.disableButtons("bubble");
-                }}>BubbbleSort</button>
-          <button className="btn" id="insertion" onClick={() => {
+                }}>Bubbble Sort</button>
+          <button className="btn btn-1 .btn-sep icon-info" id="insertion" onClick={() => {
                     this.insertionSort();
                     this.disableButtons("insertion");
-                }}>InsertionSort</button>
+                }}>Insertion Sort</button>
         
                 <div style={{ display: "inline-block", margin: "0.5em 0 0.5em" }}>
                     <label style={{ color: "whitesmoke", fontSize: "1.2em", fontFamily: "Roboto" }}>Change array size:</label>
