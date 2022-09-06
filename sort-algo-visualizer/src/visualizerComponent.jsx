@@ -4,6 +4,8 @@ import { RandomIntegers } from './SortingAlgoComponent/helper';
 import { BubbleSort } from './SortingAlgoComponent/bubbleSort';
 import { InsertionSort } from './SortingAlgoComponent/insertionSort';
 import { SelectionSort } from './SortingAlgoComponent/selectionSort';
+import { MergeSort } from './SortingAlgoComponent/mergeSort';
+import { QuickSort } from './SortingAlgoComponent/quickSort';
 
 import Slider from '@mui/material/Slider';
 
@@ -186,6 +188,89 @@ export default class VisualizerComponent extends Component {
         }, this.state.animationTime * animations.length);
     }
    
+    mergeSort() {
+        const animations = MergeSort(this.state.arr);
+        for (let i = 0; i < animations.length; i++) {
+            const isColorChange = i % 3 !== 2;
+            if (isColorChange) {
+                const [barOneIdx, barTwoIdx] = animations[i];
+                const barOneStyle = document.getElementById(barOneIdx).style;
+                const barTwoStyle = document.getElementById(barTwoIdx).style;
+                const color = i % 3 === 0 ? color1 : color2;
+                setTimeout(() => {
+                    barOneStyle.backgroundColor = color;
+                    barTwoStyle.backgroundColor = color;
+                }, i * this.state.animationTime);
+            } else {
+                setTimeout(() => {
+                    const [barOneIdx, newHeight] = animations[i];
+                    const barOneStyle = document.getElementById(barOneIdx).style;
+                    barOneStyle.height = `${newHeight}px`;
+                }, i * this.state.animationTime);
+            }
+        }
+        setTimeout(() => {
+            this.changetoColor3(this.state.arr, color3);
+            this.enableButtons();
+        }, this.state.animationTime * animations.length);
+    }
+
+    quickSort() {
+        let a = [];
+        for (let i = 0; i < this.state.arr.length; i++) {
+            a.push(document.getElementById(i).style.height);
+        }
+        console.log(a);
+        console.log(this.state.arr);
+        const animations = QuickSort(this.state.arr);
+        // console.log(animations);
+        for (let i = 0; i < animations.length; i++) {
+            const [bar1, bar2, optype] = animations[i];
+            const bar1style = document.getElementById(bar1).style;
+            const bar2style = document.getElementById(bar2).style;
+            if (optype === "pivot") {
+                setTimeout(() => {
+                    bar1style.backgroundColor = "yellow";
+                }, this.state.animationTime * i);
+            }
+            else if (optype === "pivotrev") {
+                setTimeout(() => {
+                    bar1style.backgroundColor = color2;
+                }, this.state.animationTime * i);
+            }
+            else if (optype === "colorchange1") {
+                setTimeout(() => {
+                    bar1style.backgroundColor = color1;
+                    bar2style.backgroundColor = color1;
+                }, this.state.animationTime * i);
+            }
+            else if (optype === "colorreverse") {
+                setTimeout(() => {
+                    bar1style.backgroundColor = color2;
+                    bar1style.backgroundColor = color2;
+                }, this.state.animationTime * i);
+            }
+            else {
+                setTimeout(() => {
+                    let temp = bar1style.height;
+                    console.log("The value bar1:" + temp);
+                    console.log("The value bar2:" + bar2style.height);
+                    bar1style.height = bar2style.height;
+                    bar2style.height = temp;
+                }, this.state.animationTime * i);
+            }
+        }
+        setTimeout(() => {
+            this.changetoColor3(this.state.arr, color3);
+            this.enableButtons();
+            let a = [];
+            for (let i = 0; i < this.state.arr.length; i++) {
+                a.push(document.getElementById(i).style.height);
+            }
+            console.log(a);
+        }, this.state.animationTime * animations.length);
+
+    }
     onSliderChange(e) {
 
         this.state.SIZE = e.target.value;
@@ -246,6 +331,14 @@ export default class VisualizerComponent extends Component {
                     this.selectionSort();
                     this.disableButtons("selection");
                 }}>Selection Sort</button>
+         <button className="btn btn-1 .btn-sep icon-info" id="merge" onClick={() => {
+                    this.mergeSort();
+                    this.disableButtons("merge");
+                }}>Merge Sort</button>
+         <button className="btn btn-1 .btn-sep icon-info" id="quick" onClick={() => {
+                    this.quickSort();
+                    this.disableButtons("quick");
+                }}>Quick Sort</button>
 
        
         
