@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component  } from 'react'
 import './VisualizerComponent.css';
 import { RandomIntegers } from './SortingAlgoComponent/helper';
 import { BubbleSort } from './SortingAlgoComponent/bubbleSort';
@@ -6,12 +6,16 @@ import { InsertionSort } from './SortingAlgoComponent/insertionSort';
 import { SelectionSort } from './SortingAlgoComponent/selectionSort';
 import { MergeSort } from './SortingAlgoComponent/mergeSort';
 import { QuickSort } from './SortingAlgoComponent/quickSort';
+import { AppBar, Toolbar, Typography, Box, BottomNavigation,BottomNavigationAction ,Button   } from "@mui/material";
+import ShuffleOnIcon from '@mui/icons-material/ShuffleOn';
+
 
 import Slider from '@mui/material/Slider';
 
-const color1 = `rgb(242, 242, 242)`;
+const color1 = `rgb(0, 109, 119)`;
 const color2 = `rgb(251, 139, 36)`;
-const color3 = `rgb(255, 255, 63)`;
+const color3 = `rgb(49, 87, 44)`;
+
 
 export default class VisualizerComponent extends Component {
     constructor(props) {
@@ -21,6 +25,7 @@ export default class VisualizerComponent extends Component {
             SIZE: 50,
             width: 8,
             animationTime: 1,
+            disabled: false
         }
     }
     componentDidMount() {
@@ -252,8 +257,6 @@ export default class VisualizerComponent extends Component {
             else {
                 setTimeout(() => {
                     let temp = bar1style.height;
-                    console.log("The value bar1:" + temp);
-                    console.log("The value bar2:" + bar2style.height);
                     bar1style.height = bar2style.height;
                     bar2style.height = temp;
                 }, this.state.animationTime * i);
@@ -266,8 +269,7 @@ export default class VisualizerComponent extends Component {
             for (let i = 0; i < this.state.arr.length; i++) {
                 a.push(document.getElementById(i).style.height);
             }
-            console.log(a);
-        }, this.state.animationTime * animations.length);
+            }, this.state.animationTime * animations.length);
 
     }
     onSliderChange(e) {
@@ -304,6 +306,8 @@ export default class VisualizerComponent extends Component {
                 document.getElementById(btnarr[i]).disabled = true;
         }
     }
+
+
     enableButtons() {
         const btnarr = ["newArray", "bubble","insertion","selection","merge","quick"];
         for (let i = 0; i < btnarr.length; i++) {
@@ -314,11 +318,43 @@ export default class VisualizerComponent extends Component {
   render() {
     const { arr } = this.state;
     return (
- <div>
-         <button className="btn btn-1 .btn-sep" id="newArray" onClick={() => {
+    <div>
+    <Box sx={{ flexGrow: 1 }}>
+    <AppBar position='static'>
+        <Toolbar>
+          <Typography variant='h6' noWrap component='div'sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+            Sort Algo Visualizer App
+          </Typography>
+          <Button variant="contained" startIcon={<ShuffleOnIcon />}  id="newArray" 
+          onClick={() => {this.resetArray();}}>
+             Shuffle
+          </Button>
+          <Button variant="contained" id="bubble" onClick={() => 
+            {
+                
+                this.BubbbleSort();
+
+           
+                }}>
+             Bubble Sort
+          </Button>
+          <Button variant="contained"  id="insertion" onClick={() => {this.insertionSort();}}>
+             Insertion Sort
+          </Button>
+          <Button variant="contained" id="selection" onClick={() => {this.selectionSort();}}>
+             Selection Sort
+          </Button>
+          <Button variant="contained" id="merge" onClick={() => {this.mergeSort();}}>
+             Merge Sort
+          </Button>
+          <Button variant="contained" id="quick" onClick={() => {this.quickSort();}}>
+             Quick Sort
+          </Button>
+          {/* <button className="btn btn-1 .btn-sep" id="newArray" onClick={() => {
                     this.resetArray();
-                }}>New Array</button>
-         <button className="btn btn-1 .btn-sep" id="bubble" onClick={() => {
+                }}>New Array</button> */}
+
+                {/* <button className="btn btn-1 .btn-sep" id="bubble" onClick={() => {
                 this.disableButtons("bubble");
                 this.BubbbleSort();
                 }}>Bubbble Sort</button>
@@ -337,12 +373,18 @@ export default class VisualizerComponent extends Component {
          <button className="btn btn-1 .btn-sep" id="quick" onClick={() => {
                     this.quickSort();
                     this.disableButtons("quick");
-                }}>Quick Sort</button>
+                }}>Quick Sort</button> */}
+
+        </Toolbar>
+    </AppBar>
+    </Box>
+         
+        
 
        
         
                 <div style={{ display: "inline-block", margin: "0.5em 0 0.5em" }}>
-                    <label style={{ color: "whitesmoke", fontSize: "1.2em", fontFamily: "Roboto" }}>Change array size:</label>
+                    <label style={{ color: "black", fontSize: "1.2em", fontFamily: "Lato" }}>Array size:</label>
                     <Slider 
                         className="slider"
                 aria-label="Small steps"
@@ -353,7 +395,7 @@ export default class VisualizerComponent extends Component {
                 onChange={(e) => this.onSliderChange(e)}/>
                 </div>
                 <div style={{ display: "inline-block", margin: "0 0 0 1em" }}>
-                    <label style={{ color: "whitesmoke", fontSize: "1.2em", fontFamily: "Roboto" }}>Vary animation speed:</label>
+                    <label style={{ color: "black", fontSize: "1.2em", fontFamily: "Lato" }}>Animation speed:</label>
                     <Slider 
                         className="slider"
                 aria-label="Small steps"
@@ -363,13 +405,25 @@ export default class VisualizerComponent extends Component {
                 min={0.2} max={5}
                 onChange={(e) => this.onSpeedChange(e)}/>
                 </div>
+                {/* <navBar/> */}
+
+           
                 <div className="array" style={{ margin: "0 4em 0 4em" }}>
                     {arr.map((value, index) => (
                         <li id={index} style={{ listStyle: "none", height: `${value}px`, width: `${this.state.width}px` }}></li>
                     ))}
                 </div>
 
-        </div>
+                <Box  sx={{ flexGrow: 1 }}>
+      <BottomNavigation
+        showLabels
+        value={"By Sarthak Pathak"}
+      >
+      <BottomNavigationAction label="By Sarthak Pathak" />
+      </BottomNavigation>
+    </Box>
+
+    </div>
      
     )
   }

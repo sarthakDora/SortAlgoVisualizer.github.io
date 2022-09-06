@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(15, 76, 92);
+    /* background-color: rgb(15, 76, 92); */
 }
 li{
     background-color: rgb(251, 139, 36);
@@ -18,7 +18,7 @@ li{
     color: inherit;
     background: none;
     cursor: pointer;
-    padding: 20px 30px;
+    padding: 15px 20px;
     display: inline-block;
     margin: 15px 20px;
     text-transform: uppercase;
