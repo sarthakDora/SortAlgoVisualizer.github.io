@@ -5,6 +5,8 @@ import { BubbleSort } from './SortingAlgoComponent/bubbleSort';
 import { InsertionSort } from './SortingAlgoComponent/insertionSort';
 import { SelectionSort } from './SortingAlgoComponent/selectionSort';
 
+import Slider from '@mui/material/Slider';
+
 const color1 = `rgb(242, 242, 242)`;
 const color2 = `rgb(251, 139, 36)`;
 const color3 = `rgb(255, 255, 63)`;
@@ -143,6 +145,47 @@ export default class VisualizerComponent extends Component {
             this.enableButtons();
         }, this.state.animationTime * animations.length);
     }
+    selectionSort() {
+        const animations = SelectionSort(this.state.arr);
+        for (let i = 0; i < animations.length; i++) {
+            const [bar1, bar2, optype] = animations[i];
+            const bar1style = document.getElementById(bar1).style;
+            const bar2style = document.getElementById(bar2).style;
+            switch (optype) {
+                case "colchng":
+                    setTimeout(() => {
+                        bar1style.backgroundColor = color1;
+                        bar2style.backgroundColor = color1;
+                    }, this.state.animationTime * i);
+                    break;
+                case "swap":
+                    setTimeout(() => {
+                        let temp = bar1style.height;
+                        bar1style.height = bar2style.height;
+                        bar2style.height = temp;
+                    }, this.state.animationTime * i);
+                    break;
+                case "colrev":
+                    setTimeout(() => {
+                        bar2style.backgroundColor = color2;
+                    }, this.state.animationTime * i);
+                    break;
+                case "colrevall":
+                    setTimeout(() => {
+                        bar1style.backgroundColor = color2;
+                        bar2style.backgroundColor = color2;
+                    }, this.state.animationTime * i);
+                    break;
+                default:
+                    break;
+            }
+        }
+        setTimeout(() => {
+            this.changetoColor3(this.state.arr, color3);
+            this.enableButtons();
+        }, this.state.animationTime * animations.length);
+    }
+   
     onSliderChange(e) {
 
         this.state.SIZE = e.target.value;
@@ -199,10 +242,24 @@ export default class VisualizerComponent extends Component {
                     this.insertionSort();
                     this.disableButtons("insertion");
                 }}>Insertion Sort</button>
+          <button className="btn btn-1 .btn-sep icon-info" id="selection" onClick={() => {
+                    this.selectionSort();
+                    this.disableButtons("selection");
+                }}>Selection Sort</button>
+
+       
         
                 <div style={{ display: "inline-block", margin: "0.5em 0 0.5em" }}>
                     <label style={{ color: "whitesmoke", fontSize: "1.2em", fontFamily: "Roboto" }}>Change array size:</label>
-                    <input className="slider" type="range" min={5} max={125} defaultvalue={50} step={1} onChange={(e) => this.onSliderChange(e)} />
+                    <Slider 
+                className="slider"
+        aria-label="Small steps"
+        defaultValue={50}   
+        step={1}
+        marks
+        min={5} max={125} 
+        onChange={(e) => this.onSliderChange(e)} 
+      />
                 </div>
                 <div style={{ display: "inline-block", margin: "0 0 0 1em" }}>
                     <label style={{ color: "whitesmoke", fontSize: "1.2em", fontFamily: "Roboto" }}>Vary animation speed:</label>
