@@ -12,7 +12,6 @@ import Slider from '@mui/material/Slider';
 const color1 = `rgb(242, 242, 242)`;
 const color2 = `rgb(251, 139, 36)`;
 const color3 = `rgb(255, 255, 63)`;
-const color4 = `green`;
 
 export default class VisualizerComponent extends Component {
     constructor(props) {
@@ -89,10 +88,10 @@ export default class VisualizerComponent extends Component {
     isSorted() {
         for (let i = 0; i < 100; i++) {
             this.resetArray();
-            const sortedarray = this.state.arr.slice().sort((a, b) => a - b);
-            // console.log(sortedarray);
-            const myarray = BubbleSort(this.state.arr);
-            console.log(this.isequal(sortedarray, myarray));
+            // const sortedarray = this.state.arr.slice().sort((a, b) => a - b);
+            // // console.log(sortedarray);
+            // const myarray = BubbleSort(this.state.arr);
+
         }
     }
     isequal(arr1, arr2) {
@@ -299,14 +298,14 @@ export default class VisualizerComponent extends Component {
         this.state.animationTime = e.target.value;
     }
     disableButtons(button) {
-        const btnarr = ["newArray", "merge", "bubble", "selection", "insertion", "quick"];
+        const btnarr = ["newArray", "bubble","insertion","selection","merge","quick"];
         for (let i = 0; i < btnarr.length; i++) {
             if (btnarr[i] !== button)
                 document.getElementById(btnarr[i]).disabled = true;
         }
     }
     enableButtons() {
-        const btnarr = ["newArray", "merge", "bubble", "selection", "insertion", "quick"];
+        const btnarr = ["newArray", "bubble","insertion","selection","merge","quick"];
         for (let i = 0; i < btnarr.length; i++) {
             document.getElementById(btnarr[i]).disabled = false;
         }
@@ -345,18 +344,24 @@ export default class VisualizerComponent extends Component {
                 <div style={{ display: "inline-block", margin: "0.5em 0 0.5em" }}>
                     <label style={{ color: "whitesmoke", fontSize: "1.2em", fontFamily: "Roboto" }}>Change array size:</label>
                     <Slider 
-                className="slider"
-        aria-label="Small steps"
-        defaultValue={50}   
-        step={1}
-        marks
-        min={5} max={125} 
-        onChange={(e) => this.onSliderChange(e)} 
-      />
+                        className="slider"
+                aria-label="Small steps"
+                defaultValue={50}   
+                step={1}
+                marks
+                min={5} max={125} 
+                onChange={(e) => this.onSliderChange(e)}/>
                 </div>
                 <div style={{ display: "inline-block", margin: "0 0 0 1em" }}>
                     <label style={{ color: "whitesmoke", fontSize: "1.2em", fontFamily: "Roboto" }}>Vary animation speed:</label>
-                    <input className="slider" type="range" min={0.2} max={5} defaultvalue={1} step={0.1} onChange={(e) => this.onSpeedChange(e)} />
+                    <Slider 
+                        className="slider"
+                aria-label="Small steps"
+                defaultValue={1}   
+                step={0.1}
+                marks
+                min={0.2} max={5}
+                onChange={(e) => this.onSpeedChange(e)}/>
                 </div>
                 <div className="array" style={{ margin: "0 4em 0 4em" }}>
                     {arr.map((value, index) => (
