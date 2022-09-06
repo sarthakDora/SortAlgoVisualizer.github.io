@@ -98,6 +98,51 @@ export default class VisualizerComponent extends Component {
         }
         return true;
     }
+    insertionSort() {
+        const animations = InsertionSort(this.state.arr);
+        for (let i = 0; i < animations.length; i++) {
+            const [bar1, bar2, optype] = animations[i];
+            const bar1style = document.getElementById(bar1).style;
+            const bar2style = document.getElementById(bar2).style;
+            switch (optype) {
+                case "key":
+                    setTimeout(() => {
+                        bar1style.backgroundColor = "purple";
+                    }, this.state.animationTime * i);
+                    break;
+                case "colorchange":
+                    setTimeout(() => {
+                        bar1style.backgroundColor = color1;
+                        bar2style.backgroundColor = color1;
+                    }, this.state.animationTime * i);
+                    break;
+                case "swap":
+                    setTimeout(() => {
+                        let temp = bar1style.height;
+                        bar1style.height = bar2style.height;
+                        bar2style.height = temp;
+                    }, this.state.animationTime * i);
+                    break;
+                case "colorrev":
+                    setTimeout(() => {
+                        bar1style.backgroundColor = color2;
+                        bar2style.backgroundColor = color2;
+                    }, this.state.animationTime * i);
+                    break;
+                case "keyrev":
+                    setTimeout(() => {
+                        bar1style.backgroundColor = color2;
+                    }, this.state.animationTime * i);
+                    break;
+                default:
+                    break;
+            }
+        }
+        setTimeout(() => {
+            this.changetoColor3(this.state.arr, color3);
+            this.enableButtons();
+        }, this.state.animationTime * animations.length);
+    }
     onSliderChange(e) {
 
         this.state.SIZE = e.target.value;
@@ -120,33 +165,10 @@ export default class VisualizerComponent extends Component {
         else if (e.target.value > 10 && e.target.value <= 20)
             this.state.width = 12;
 
-        // this.setState.SIZE = e.target.value;
-        // // this.state.SIZE = e.target.value;
-        // if (e.target.value >= 60 && e.target.value <= 75)
-        //     this.setState.width = 7;
-        // else if (e.target.value > 75 && e.target.value <= 90)
-        //     this.setState.width = 6;
-        // else if (e.target.value > 90 && e.target.value <= 105)
-        //     this.setState.width = 5;
-        // else if (e.target.value > 100 && e.target.value <= 125)
-        //     this.setState.width = 5;
-        // else if (e.target.value > 50 && e.target.value < 60)
-        //     this.setState.width = 8;
-        // else if (e.target.value > 40 && e.target.value <= 50)
-        //     this.setState.width = 9;
-        // else if (e.target.value > 30 && e.target.value <= 40)
-        //     this.setState.width = 10;
-        // else if (e.target.value > 20 && e.target.value <= 30)
-        //     this.setState.width = 11;
-        // else if (e.target.value > 10 && e.target.value <= 20)
-        //     this.setState.width = 12;
-
-
         this.resetArray();
     }
     onSpeedChange(e) {
         this.state.animationTime = e.target.value;
-        // this.setState.animationTime = e.target.value;
     }
     disableButtons(button) {
         const btnarr = ["newArray", "merge", "bubble", "selection", "insertion", "quick"];
@@ -173,6 +195,10 @@ export default class VisualizerComponent extends Component {
                     this.BubbbleSort();
                     this.disableButtons("bubble");
                 }}>BubbbleSort</button>
+          <button className="btn" id="insertion" onClick={() => {
+                    this.insertionSort();
+                    this.disableButtons("insertion");
+                }}>InsertionSort</button>
         
                 <div style={{ display: "inline-block", margin: "0.5em 0 0.5em" }}>
                     <label style={{ color: "whitesmoke", fontSize: "1.2em", fontFamily: "Roboto" }}>Change array size:</label>
