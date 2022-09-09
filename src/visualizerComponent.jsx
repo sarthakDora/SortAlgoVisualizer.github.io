@@ -22,7 +22,7 @@ export default class VisualizerComponent extends Component {
         super(props);
         this.state = {
             arr: [],
-            SIZE: 50,
+            SIZE: 20,
             width: 8,
             animationTime: 1,
             disabled: false
@@ -273,7 +273,6 @@ export default class VisualizerComponent extends Component {
 
     }
     onSliderChange(e) {
-
         this.state.SIZE = e.target.value;
         if (e.target.value >= 60 && e.target.value <= 75)
             this.state.width = 7;
@@ -292,7 +291,7 @@ export default class VisualizerComponent extends Component {
         else if (e.target.value > 20 && e.target.value <= 30)
             this.state.width = 11;
         else if (e.target.value > 10 && e.target.value <= 20)
-            this.state.width = 12;
+            this.state.width = 5;
 
         this.resetArray();
     }
@@ -350,31 +349,6 @@ export default class VisualizerComponent extends Component {
           <Button variant="contained" id="quick" onClick={() => {this.quickSort();}}>
              Quick Sort
           </Button>
-          {/* <button className="btn btn-1 .btn-sep" id="newArray" onClick={() => {
-                    this.resetArray();
-                }}>New Array</button> */}
-
-                {/* <button className="btn btn-1 .btn-sep" id="bubble" onClick={() => {
-                this.disableButtons("bubble");
-                this.BubbbleSort();
-                }}>Bubbble Sort</button>
-          <button className="btn btn-1 .btn-sep" id="insertion" onClick={() => {
-                    this.insertionSort();
-                    this.disableButtons("insertion");
-                }}>Insertion Sort</button>
-          <button className="btn btn-1 .btn-sep" id="selection" onClick={() => {
-                    this.selectionSort();
-                    this.disableButtons("selection");
-                }}>Selection Sort</button>
-         <button className="btn btn-1 .btn-sep" id="merge" onClick={() => {
-                    this.mergeSort();
-                    this.disableButtons("merge");
-                }}>Merge Sort</button>
-         <button className="btn btn-1 .btn-sep" id="quick" onClick={() => {
-                    this.quickSort();
-                    this.disableButtons("quick");
-                }}>Quick Sort</button> */}
-
         </Toolbar>
     </AppBar>
     </Box>
@@ -388,10 +362,10 @@ export default class VisualizerComponent extends Component {
                     <Slider 
                         className="slider"
                 aria-label="Small steps"
-                defaultValue={50}   
+                defaultValue={20}   
                 step={1}
                 marks
-                min={5} max={125} 
+                min={5} max={100} 
                 onChange={(e) => this.onSliderChange(e)}/>
                 </div>
                 <div style={{ display: "inline-block", margin: "0 0 0 1em" }}>
@@ -408,7 +382,7 @@ export default class VisualizerComponent extends Component {
                 {/* <navBar/> */}
 
            
-                <div className="array" style={{ margin: "0 4em 0 4em" }}>
+                <div className="array" style={{ margin: "0.5em 0 0 5em" }}>
                     {arr.map((value, index) => (
                         <li id={index} style={{ listStyle: "none", height: `${value}px`, width: `${this.state.width}px` }}></li>
                     ))}
